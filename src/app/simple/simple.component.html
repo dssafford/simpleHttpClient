@@ -1,0 +1,32 @@
+<div class="text-center">
+  <h1>Welcome to {{ title }}!</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td>Artist</td>
+      <td>Track</td>
+      <td>Title</td>
+      <td class="text-right">
+        <!--<button class="btn btn-primary btn-sm">-->
+        <!--<span class="glyphicon glyphicon-plus"></span>-->
+        <!--</button>-->
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let crap of craps?.results">
+      <td>{{ crap.artistName }}</td>
+      <td>{{ crap.trackName }}</td>
+      <td>{{ title }}</td>
+      <td class="text-right">
+        <button class="btn btn-success btn-sm">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button class="btn btn-danger btn-sm">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
