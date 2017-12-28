@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../user.service';
-import {User} from '../user';
+import { UserService } from './user.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import {DataSource} from '@angular/cdk/collections';
+import { User } from './user';
 
 @Component({
   selector: 'app-user',
@@ -9,24 +12,22 @@ import {User} from '../user';
 })
 export class UserComponent implements OnInit {
 
-  craps: User[];
+  dataSource = new UserDataSource(this.userService);
+
+  displayedColumns = ['name', 'email', 'phone', 'company'];
 
   constructor(private userService: UserService) { }
 
-  getMyData() {
-    // this.userService.getData().then(data => this.craps = data);
-    console.log(this.userService.getData());
-    // .subscribe(data => this.users = data);
-    // this.simpleService.getData()
-    //   .subscribe(data => this.users = data);
-
-    this.userService.getData().then(craps => this.craps = craps);
-  }
-
-
   ngOnInit() {
-
-    this.getMyData();
-
   }
+}
+
+export class UserDataSource extends DataSource<any> {
+  constructor(private userService: UserService) {
+    super();
+  }
+  connect(): Observable<User[]> {
+    return this.userService.getData();
+  }
+  disconnect() {}
 }
