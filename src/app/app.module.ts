@@ -13,6 +13,7 @@ import {
   MatButtonModule, MatIconModule, MatMenuModule, MatSortModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
+import { SimpleTableComponent } from './simple-table/simple-table.component';
 
 
 
@@ -20,7 +21,8 @@ import {
   declarations: [
     AppComponent,
     SimpleComponent,
-    UserComponent
+    UserComponent,
+    SimpleTableComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, HttpClientModule, MatButtonModule,
