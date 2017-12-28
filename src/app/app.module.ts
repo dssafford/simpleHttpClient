@@ -10,10 +10,13 @@ import { UserComponent } from './user/user.component';
 import {UserService} from './user/user.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatIconModule, MatMenuModule, MatSortModule, MatTableModule,
+  MatButtonModule, MatButtonToggleModule, MatError, MatIconModule, MatMenuModule, MatSortModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import { SimpleTableComponent } from './simple-table/simple-table.component';
+import {DemoMaterialModule} from './demo-material-module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 
@@ -22,11 +25,12 @@ import { SimpleTableComponent } from './simple-table/simple-table.component';
     AppComponent,
     SimpleComponent,
     UserComponent,
-    SimpleTableComponent
+    SimpleTableComponent,
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, HttpClientModule, MatButtonModule,
-    MatMenuModule, MatIconModule, MatToolbarModule, MatTableModule, MatSortModule
+    MatButtonToggleModule, MatMenuModule, MatIconModule, MatToolbarModule, MatTableModule, MatSortModule,
+    DemoMaterialModule, ReactiveFormsModule, FormsModule
   ],
   providers: [SimpleService, UserService],
   bootstrap: [AppComponent]

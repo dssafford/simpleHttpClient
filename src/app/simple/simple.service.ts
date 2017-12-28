@@ -11,23 +11,16 @@ export class SimpleService {
 
   constructor(private http: HttpClient) {}
 
-  api = 'https://itunes.apple.com/search?term=Moo&media=music&limit=20';
+  // api = 'https://itunes.apple.com/search?term=Moo&media=music&limit=20';
+  apiRoot = 'https://itunes.apple.com/search';
 
-  getData(): Promise<SearchItem[]> {
-    // console.log(Promise.resolve(TUNES);
-
-    // console.log(this.http.get(TUNES)
-    //   .map((data: any) => data.results as SearchItem[]));
-
-    // return this.http.get<SearchItem[]>(this.api)
-    //   .map((data: any) => data.results as SearchItem[]);
-
-    return null;
+  // NOTE: since the return is wrapped in a resultcount and results: you must use .results
+  // for the return to a SearchItem[]
+  getData(term: string): Observable<SearchItem[]> {
+    const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+    return this.http.get<SearchItem[]>(apiURL)
+      .map((data: any) => data.results as SearchItem[]);
 
   }
-
-  // getAutos(): Promise<Auto[]> {
-  //   return Promise.resolve(AUTOS);
-  // }
 
 }

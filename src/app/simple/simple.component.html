@@ -1,7 +1,26 @@
 <div>
   Simple Component Example
 </div>
+<form class="form-inline">
+  <mat-form-field hintLabel="Max 10 characters">
+    <input matInput #search maxlength="10" placeholder="Enter search string" >
+
+    <!--<mat-error *ngIf="textFormControl.hasError('required')">-->
+      <!--Email is <strong>required</strong>-->
+    <!--</mat-error>-->
+
+  </mat-form-field>
+  <button mat-raised-button="Basic">Cancel</button>
+  <button mat-raised-button="Primary" (click)="getData(search.value)">Search</button>
+</form>
+
 <div>
+  <p class="lead" *ngIf="loading">
+    Loading...
+  </p>
+</div>
+<div>
+  <p></p>
   <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="trackName">
       <mat-header-cell *matHeaderCellDef> TrackName </mat-header-cell>
@@ -17,7 +36,7 @@
     </ng-container>
     <ng-container matColumnDef="link">
       <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let simple"> {{simple.link}} </mat-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.link }} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
