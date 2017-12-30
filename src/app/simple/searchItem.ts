@@ -1,8 +1,8 @@
 export interface SearchItem {
   trackName: string;
   artistName: string;
-  thumbnail: string;
-  link: string;
+  kind: string;
+  previewUrl: string;
 }
 
 //   trackName: string;

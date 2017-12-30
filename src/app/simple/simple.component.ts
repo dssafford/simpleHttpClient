@@ -7,17 +7,14 @@ import {Observable} from 'rxjs/Observable';
 import {DataSource} from '@angular/cdk/collections';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 
-const TUNES_DATA: SearchItem[] = {
-  'resultCount': 20,
-  'results': [
-    {
-        {trackName: 'Hydrogen', artistName: 'dude', thumbnail: 'H', link: 'wowser'},
-        {trackName: 'Hydrogen', artistName: 'dude', thumbnail: 'H', link: 'wowser'},
-        {trackName: 'Hydrogen', artistName: 'dasd', thumbnail: 'H', link: 'wowser'},
-        {trackName: 'Hydrogen', artistName: 'dude', thumbnail: 'H', link: 'wowser'},
-        {trackName: 'Hydrogen', artistName: 'dude', thumbnail: 'H', link: 'wowser'}
+const TUNES_DATA: SearchItem[] = [
+
+        { trackName:  'Hydrogen', artistName:   'dude', kind: 'H', previewUrl: 'previewUrl'},
+        { trackName:  'Hydrogen', artistName:  'dude', kind:  'H', previewUrl:  'previewUrl'},
+        { trackName:  'Hydrogen', artistName:  'dasd', kind:  'H', previewUrl:  'previewUrl'},
+        { trackName:  'Hydrogen', artistName:  'dude', kind:  'H', previewUrl:  'previewUrl'},
+        { trackName:  'Hydrogen', artistName:  'dude', kind:  'H', previewUrl:  'previewUrl'},
   ]
-};
 
 @Component({
   selector: 'app-simple',
@@ -28,7 +25,7 @@ export class SimpleComponent implements OnInit {
 
   // searchItem = new SearchItem();
 
-  displayedColumns = ['trackName', 'artistName', 'thumbnail', 'link'];
+  displayedColumns = ['trackName', 'artistName', 'kind', 'previewUrl'];
   // dataSource = new MatTableDataSource<SearchItem>(TUNES_DATA.results);
 
   dataSource: UserDataSource;

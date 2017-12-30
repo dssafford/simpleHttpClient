@@ -1,0 +1,64 @@
+<p>
+  go-test works!
+</p>
+
+<div><h1>
+  Go Test Example
+</h1>
+<p></p>
+</div>
+<form class="form-inline">
+  <mat-form-field hintLabel="Max 10 characters">
+    <input matInput #search maxlength="10" placeholder="Enter search string" >
+
+    <!--<mat-error *ngIf="textFormControl.hasError('required')">-->
+    <!--Email is <strong>required</strong>-->
+    <!--</mat-error>-->
+
+  </mat-form-field>
+  <button mat-raised-button="Alert">Cancel</button>
+  <button mat-raised-button="Primary" (click)="getData(search.value)">Search</button>
+</form>
+
+<div>
+  <p class="lead" *ngIf="loading">
+    Loading...
+  </p>
+</div>
+<div>
+  <p></p>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.Id }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="first_name">
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.First_Name }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="last_name">
+      <mat-header-cell *matHeaderCellDef> Kind </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.Last_Name }} </mat-cell>
+    </ng-container>
+    <!--<ng-container matColumnDef="previewUrl">-->
+      <!--<mat-header-cell *matHeaderCellDef> Preview Url </mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let simple"> {{ simple.previewUrl }} </mat-cell>-->
+    <!--</ng-container>-->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<!--<h1>Indeterminate</h1>-->
+
+<!--<mat-button-toggle-group class="demo-progress-spinner-controls" [(ngModel)]="color">-->
+  <!--<mat-button-toggle value="primary">Primary Color</mat-button-toggle>-->
+  <!--<mat-button-toggle value="accent">Accent Color</mat-button-toggle>-->
+  <!--<mat-button-toggle value="warn">Warn Color</mat-button-toggle>-->
+<!--</mat-button-toggle-group>-->
+
+<!--<div class="demo-progress-spinner">-->
+  <!--<mat-progress-spinner mode="indeterminate" [color]="color"></mat-progress-spinner>-->
+  <!--<mat-progress-spinner mode="indeterminate" [color]="color"></mat-progress-spinner>-->
+  <!--<mat-spinner [color]="color"></mat-spinner>-->
+<!--</div>-->

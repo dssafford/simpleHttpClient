@@ -10,7 +10,7 @@
     <!--</mat-error>-->
 
   </mat-form-field>
-  <button mat-raised-button="Basic">Cancel</button>
+  <button mat-raised-button="Alert">Cancel</button>
   <button mat-raised-button="Primary" (click)="getData(search.value)">Search</button>
 </form>
 
@@ -30,17 +30,31 @@
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
       <mat-cell *matCellDef="let simple"> {{ simple.artistName }} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="thumbnail">
-      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let simple"> {{ simple.thumbnail }} </mat-cell>
+    <ng-container matColumnDef="kind">
+      <mat-header-cell *matHeaderCellDef> Kind </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.kind }} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="link">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let simple"> {{ simple.link }} </mat-cell>
+    <ng-container matColumnDef="previewUrl">
+      <mat-header-cell *matHeaderCellDef> Preview Url </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.previewUrl }} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+</div>
+
+<h1>Indeterminate</h1>
+
+<mat-button-toggle-group class="demo-progress-spinner-controls" [(ngModel)]="color">
+  <mat-button-toggle value="primary">Primary Color</mat-button-toggle>
+  <mat-button-toggle value="accent">Accent Color</mat-button-toggle>
+  <mat-button-toggle value="warn">Warn Color</mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="demo-progress-spinner">
+  <mat-progress-spinner mode="indeterminate" [color]="color"></mat-progress-spinner>
+  <mat-progress-spinner mode="indeterminate" [color]="color"></mat-progress-spinner>
+  <mat-spinner [color]="color"></mat-spinner>
 </div>
 
 

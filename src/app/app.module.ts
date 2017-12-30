@@ -16,6 +16,8 @@ import {
 import { SimpleTableComponent } from './simple-table/simple-table.component';
 import {DemoMaterialModule} from './demo-material-module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { GoTestComponent } from './go-test/go-test.component';
+import {GoTestService} from './go-test/go-test.service';
 
 
 
@@ -26,13 +28,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     SimpleComponent,
     UserComponent,
     SimpleTableComponent,
+    GoTestComponent,
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, HttpClientModule, MatButtonModule,
     MatButtonToggleModule, MatMenuModule, MatIconModule, MatToolbarModule, MatTableModule, MatSortModule,
     DemoMaterialModule, ReactiveFormsModule, FormsModule
   ],
-  providers: [SimpleService, UserService],
+  providers: [SimpleService, UserService, GoTestService],
   bootstrap: [AppComponent]
 })
 
