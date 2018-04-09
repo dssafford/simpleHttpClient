@@ -18,7 +18,11 @@ import {DemoMaterialModule} from './demo-material-module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { GoTestComponent } from './go-test/go-test.component';
 import {GoTestService} from './go-test/go-test.service';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { EmployeeComponent } from './employee/employee.component';
+import {EmployeeService} from './services/employee.service';
+import { QuizListComponent } from './quiz-list/quiz-list.component';
+import {QuizListService} from './quiz-list.service';
 
 
 
@@ -29,14 +33,17 @@ import {GoTestService} from './go-test/go-test.service';
     UserComponent,
     SimpleTableComponent,
     GoTestComponent,
+    EmployeeComponent,
+    QuizListComponent,
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, HttpClientModule, MatButtonModule,
     MatButtonToggleModule, MatMenuModule, MatIconModule, MatToolbarModule, MatTableModule, MatSortModule,
     DemoMaterialModule, ReactiveFormsModule, FormsModule
   ],
-  providers: [SimpleService, UserService, GoTestService],
-  bootstrap: [AppComponent]
+  providers: [SimpleService, UserService, GoTestService, EmployeeService, QuizListService],
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 
 

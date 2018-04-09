@@ -1,0 +1,145 @@
+<div>
+  Simple Component Example
+</div>
+<form class="form-inline">
+  <mat-form-field hintLabel="Max 10 characters">
+    <input matInput #search maxlength="10" placeholder="Enter search string" >
+
+    <!--<mat-error *ngIf="textFormControl.hasError('required')">-->
+    <!--Email is <strong>required</strong>-->
+    <!--</mat-error>-->
+
+  </mat-form-field>
+  <button mat-raised-button="Alert">Cancel</button>
+  <button mat-raised-button="Primary" (click)="getData(search.value)">Search</button>
+</form>
+
+<div>
+  <p class="lead" *ngIf="loading">
+    Loading...
+  </p>
+</div>
+<div>
+  <p></p>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="trackName">
+      <mat-header-cell *matHeaderCellDef> TrackName </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.trackName }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="artistName">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.artistName }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="kind">
+      <mat-header-cell *matHeaderCellDef> Kind </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.kind }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="previewUrl">
+      <mat-header-cell *matHeaderCellDef> Preview Url </mat-header-cell>
+      <mat-cell *matCellDef="let simple"> {{ simple.previewUrl }} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<h1>Indeterminate</h1>
+
+<mat-button-toggle-group class="demo-progress-spinner-controls" [(ngModel)]="color">
+  <mat-button-toggle value="primary">Primary Color</mat-button-toggle>
+  <mat-button-toggle value="accent">Accent Color</mat-button-toggle>
+  <mat-button-toggle value="warn">Warn Color</mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="demo-progress-spinner">
+  <mat-progress-spinner mode="indeterminate" [color]="color"></mat-progress-spinner>
+  <mat-progress-spinner mode="indeterminate" [color]="color"></mat-progress-spinner>
+  <mat-spinner [color]="color"></mat-spinner>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div>-->
+<!--<mat-table [dataSource]="dataSource">-->
+<!--<ng-container matColumnDef="name">-->
+<!--<mat-header-cell *matHeaderCellDef> TrackName </mat-header-cell>-->
+<!--<mat-cell *matCellDef="let simple"> {{ simple.trackName }} </mat-cell>-->
+<!--</ng-container>-->
+<!--<ng-container matColumnDef="email">-->
+<!--<mat-header-cell *matHeaderCellDef> Artist </mat-header-cell>-->
+<!--<mat-cell *matCellDef="let simple"> {{ simple.artistName }} </mat-cell>-->
+<!--</ng-container>-->
+<!--<ng-container matColumnDef="phone">-->
+<!--<mat-header-cell *matHeaderCellDef> Url </mat-header-cell>-->
+<!--<mat-cell *matCellDef="let simple"> {{ simple.artistViewUrl }} </mat-cell>-->
+<!--</ng-container>-->
+<!--<ng-container matColumnDef="company">-->
+<!--<mat-header-cell *matHeaderCellDef> Collection </mat-header-cell>-->
+<!--<mat-cell *matCellDef="let simple"> {{simple.collectionArtistName} </mat-cell>-->
+<!--</ng-container>-->
+<!--<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+<!--<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
+<!--</mat-table>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+  <h1>Welcome to {{title}}!</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td>Name</td>
+      <td>Phone</td>
+      <td>Email</td>
+      <td>Created Date</td>
+      <td class="text-right">
+        <button (click)="goToAdd()" class="btn btn-primary btn-sm">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{employee.lastName}}, {{employee.firstName}}</td>
+      <td>{{employee.phone}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.createDate}}</td>
+      <td class="text-right">
+        <button (click)="goToEdit(employee.id)" class="btn btn-success btn-sm">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button (click)="deleteEmployee(employee)" class="btn btn-danger btn-sm">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

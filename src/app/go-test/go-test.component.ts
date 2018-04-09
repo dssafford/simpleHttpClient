@@ -15,7 +15,9 @@ export class GoTestComponent implements OnInit {
 
   dataSource: UserDataSource;
 
-  constructor(private goTestService: GoTestService) { }
+  constructor(private goTestService: GoTestService) {
+
+  }
 
 
   getData() {

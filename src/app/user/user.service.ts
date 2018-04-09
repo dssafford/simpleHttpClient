@@ -13,7 +13,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getData(): Observable<User[]> {
-    // console.log(this.http.get(this.api).toPromise());
+    console.log(this.http.get(this.api).toPromise());
     return(this.http.get<User[]>(this.api));
   }
 }
