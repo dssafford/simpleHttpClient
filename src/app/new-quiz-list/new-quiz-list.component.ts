@@ -40,6 +40,7 @@ export class NewQuizListComponent implements AfterViewInit {
     // this.exampleDatabase = new ExampleHttpDao(this.http);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
