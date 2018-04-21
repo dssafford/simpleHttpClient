@@ -31,24 +31,28 @@ export class QuizListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
 
   ngOnInit(): void {
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     this.GetQuizList();
   }
 
-  GetQuizList() {
-    this.quizListService.eatshit()
-      .subscribe( data => {
-          // Set the dataSource here
-          // this.dataSource = new MatTableDataSource(data.result);
-        },
-        error => console.log('GetControls Method: ' + <any>error, 'alert alert-danger'));
-  }
   ngAfterViewInit() {
-  this.dataSource.paginator = this.paginator;
-  this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
+
+  GetQuizList() {
+    this.quizListService.getData()
+      .subscribe( data => {
+          // Set the dataSource here
+          this.dataSource = new MatTableDataSource(data);
+        },
+        error => console.log('GetControls Method: ' + <any>error, 'alert alert-danger'));
+  }
+
 }

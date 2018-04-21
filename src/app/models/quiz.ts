@@ -13,8 +13,9 @@ export class Quiz {
   numberOfQuestions: number;
   date_added: Date;
   comments: string;
+  total_count: number;
 
-  answers: Answer[];
+  items: Answer[];
 
   constructor() {}
 }

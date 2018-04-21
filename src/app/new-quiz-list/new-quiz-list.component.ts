@@ -8,6 +8,8 @@ import {catchError} from 'rxjs/operators/catchError';
 import {map} from 'rxjs/operators/map';
 import {startWith} from 'rxjs/operators/startWith';
 import {switchMap} from 'rxjs/operators/switchMap';
+import {Quiz} from '../models/quiz';
+import {SearchItem} from '../simple/searchItem';
 
 /**
  * @title Table retrieving data through HTTP
@@ -18,8 +20,10 @@ import {switchMap} from 'rxjs/operators/switchMap';
   templateUrl: 'new-quiz-list.component.html',
 })
 export class NewQuizListComponent implements AfterViewInit {
-  displayedColumns = ['created', 'state', 'number', 'title'];
-  exampleDatabase: ExampleHttpDao | null;
+  // displayedColumns = ['created', 'state', 'number', 'title'];
+  displayedColumns = ['id', 'numberOfQuestions', 'score', 'comments'];
+
+  // exampleDatabase: ExampleHttpDao | null;
   dataSource = new MatTableDataSource();
 
   resultsLength = 0;
@@ -29,11 +33,13 @@ export class NewQuizListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   ngAfterViewInit() {
-    this.exampleDatabase = new ExampleHttpDao(this.http);
-
+    // this.exampleDatabase = new ExampleHttpDao(this.http);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -42,16 +48,14 @@ export class NewQuizListComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.exampleDatabase!.getRepoIssues(
-            this.sort.active, this.sort.direction, this.paginator.pageIndex);
+          return this.getData();
         }),
         map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          this.resultsLength = data.total_count;
-
-          return data.items;
+          this.resultsLength = 5; //data.total_count;
+          return data;
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -61,32 +65,32 @@ export class NewQuizListComponent implements AfterViewInit {
         })
       ).subscribe(data => this.dataSource.data = data);
   }
-}
 
-export interface GithubApi {
-  items: GithubIssue[];
-  total_count: number;
-}
+  getData(): Observable<Quiz[]> {
+    // const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+    return this.http.get<Quiz[]>('http://localhost:8004/api/QuizList')
+      .map((data: any) => data as Quiz[]);
 
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
+  }
+
+  getQuizListData(sort: string, order: string, page: number): Observable<Quiz> {
+    const href = 'http://localhost:8004/api/QuizList';
+    // console.log(this.http.get<Quiz>(href).toPromise());
+    return this.http.get<Quiz>(href);
+  }
+  quizListData(): Observable<Quiz> {
+    const href = 'http://localhost:8004/api/QuizList';
+    // console.log(this.http.get<Quiz>(href).toPromise());
+    return this.http.get<Quiz>(href);
+  }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 }
 
 /** An example database that the data source uses to retrieve data for the table. */
-export class ExampleHttpDao {
-  constructor(private http: HttpClient) {}
-
-  getRepoIssues(sort: string, order: string, page: number): Observable<GithubApi> {
-    const href = 'https://api.github.com/search/issues';
-    const requestUrl =
-      `${href}?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}`;
-
-    return this.http.get<GithubApi>(requestUrl);
-  }
-}
 
 
 /**  Copyright 2018 Google Inc. All Rights Reserved.

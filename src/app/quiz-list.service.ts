@@ -24,17 +24,22 @@ export class QuizListService {
     console.log('list below');
 
 
-    console.log(this.http.get('http://localhost:8004/api/QuizList').toPromise());
+    // console.log(this.http.get('http://localhost:8004/api/QuizList').toPromise());
 
-    this.http.get<Quiz[]>('http://localhost:8004/api/QuizList').
-      subscribe(quizzes => this.myQuizzes = quizzes);
+    // this.http.get<Quiz[]>('http://localhost:8004/api/QuizList').
+    //   subscribe(quizzes => this.myQuizzes = quizzes);
 
-    console.log(this.myQuizzes.toString());
+    // console.log(this.myQuizzes.toString());
 
     return (this.http.get<Quiz[]>(this.api));
 
   }
+  getData(): Observable<Quiz[]> {
+    // const apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+    return this.http.get<Quiz[]>('http://localhost:8004/api/QuizList')
+      .map((data: any) => data as Quiz[]);
 
+  }
   eatshit() {
     // this.countryService.getCountries().subscribe(countries => this.countries = countries);
     return this.http.get(this.api)
