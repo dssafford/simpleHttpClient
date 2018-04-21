@@ -23,6 +23,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import {EmployeeService} from './services/employee.service';
 import { QuizListComponent } from './quiz-list/quiz-list.component';
 import {QuizListService} from './quiz-list.service';
+import { TableHttpExampleFullComponent } from './table-http-example-full/table-http-example-full.component';
+import { NewQuizListComponent } from './new-quiz-list/new-quiz-list.component';
 
 
 
@@ -35,6 +37,8 @@ import {QuizListService} from './quiz-list.service';
     GoTestComponent,
     EmployeeComponent,
     QuizListComponent,
+    TableHttpExampleFullComponent,
+    NewQuizListComponent,
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, HttpClientModule, MatButtonModule,
