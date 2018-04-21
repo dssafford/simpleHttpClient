@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, ViewChild} from '@angular/core';
+import {Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
@@ -9,7 +9,8 @@ import {map} from 'rxjs/operators/map';
 import {startWith} from 'rxjs/operators/startWith';
 import {switchMap} from 'rxjs/operators/switchMap';
 import {Quiz} from '../models/quiz';
-import {SearchItem} from '../simple/searchItem';
+import {tap, debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {fromEvent} from 'rxjs/observable/fromEvent';
 
 /**
  * @title Table retrieving data through HTTP
@@ -32,6 +33,7 @@ export class NewQuizListComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('input') input: ElementRef;
 
   constructor(private http: HttpClient) {
   }
@@ -40,9 +42,22 @@ export class NewQuizListComponent implements AfterViewInit {
     // this.exampleDatabase = new ExampleHttpDao(this.http);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
+    this.isLoadingResults = true;
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    fromEvent(this.input.nativeElement, 'keyup ')
+      .pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        tap(() => {
+          this.paginator.pageIndex = 0;
+          this.applyFilter(this.input.nativeElement.valueOf());
+        })
+      )
+      .subscribe();
+
+
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
